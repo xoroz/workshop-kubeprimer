@@ -129,3 +129,20 @@ So far we have exposed the frontend using `NodePort`, but accessing the service 
 
 `minikube addons enable ingress`
 
+## Delete current NodePort and apply Ingress config
+
+'kubectl delete services powerapp-web-service'
+
+'kubectl apply -f services/web-service-ingress.yaml'
+'kubectl apply -f ingress/powerapp-ingress.yaml'
+
+note: the application will only work if you it is called by its virtualhost name.
+we must edit etc/hosts with the 'minikube ip' and with hostname defined in
+
+powerapp-ingress.yaml
+spec:
+  rules:
+  - host: powerapp.kubeprimer.local 
+
+open the browser in:
+http://powerapp.kubeprimer.local/
